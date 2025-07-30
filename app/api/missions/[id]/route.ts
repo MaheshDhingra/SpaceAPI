@@ -14,7 +14,7 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
       return NextResponse.json({ error: 'Mission not found' }, { status: 404 });
     }
     return NextResponse.json(result.rows[0]);
-  } catch (error: any) {
+  } catch (error: unknown) {
     return handleError(error);
   }
 }
@@ -27,7 +27,7 @@ export async function DELETE(req: Request, { params }: { params: { id: string } 
       return NextResponse.json({ error: 'Mission not found' }, { status: 404 });
     }
     return NextResponse.json({ message: 'Mission deleted successfully' });
-  } catch (error: any) {
+  } catch (error: unknown) {
     return handleError(error);
   }
 }

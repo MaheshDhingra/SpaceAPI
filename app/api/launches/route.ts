@@ -10,7 +10,7 @@ export async function POST(req: Request) {
       [name, date, rocket]
     );
     return NextResponse.json(result.rows[0], { status: 201 });
-  } catch (error: any) {
+  } catch (error: unknown) {
     return handleError(error);
   }
 }

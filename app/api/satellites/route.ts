@@ -6,7 +6,7 @@ export async function GET() {
   try {
     const result = await query('SELECT * FROM satellites');
     return NextResponse.json(result.rows);
-  } catch (error: any) {
+  } catch (error: unknown) {
     return handleError(error);
   }
 }
