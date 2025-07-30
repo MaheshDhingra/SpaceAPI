@@ -163,7 +163,7 @@ export default function Home() {
                   <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">/api/nasa/mars-rover-photos</code> – Image data gathered by NASA's Mars rovers.
                 </li>
                 <li>
-                  <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">/api/nasa/image-video-library</code> – Access the NASA Image and Video Library.
+                  <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">/api/nasa/image-video-library</code> – Access the NASA's Image and Video Library.
                 </li>
                 <li>
                   <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">/api/nasa/open-science-data-repository</code> – Programmatic interface for the Open Science Data Repository.
