@@ -19,7 +19,7 @@ export async function GET(req: Request) {
     // GIBS API is complex and often uses WMS/WMTS. This is a simplified proxy.
     // A full implementation would require more sophisticated WMS/WMTS client logic.
     // For demonstration, we'll construct a basic WMS GetMap request.
-    let url = `https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi?SERVICE=WMS&REQUEST=GetMap&VERSION=1.3.0&LAYERS=${layer}&STYLES=&FORMAT=${format}&CRS=EPSG:4326&BBOX=${bbox}&WIDTH=${width}&HEIGHT=${height}&TIME=${time}&api_key=${NASA_API_KEY}`;
+    const url = `https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi?SERVICE=WMS&REQUEST=GetMap&VERSION=1.3.0&LAYERS=${layer}&STYLES=&FORMAT=${format}&CRS=EPSG:4326&BBOX=${bbox}&WIDTH=${width}&HEIGHT=${height}&TIME=${time}&api_key=${NASA_API_KEY}`;
 
     const response = await fetch(url);
     if (!response.ok) {

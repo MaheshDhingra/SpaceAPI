@@ -12,7 +12,7 @@ export async function GET(req: Request) {
     const noradId = searchParams.get('norad_id'); // NORAD ID of the object
     const date = searchParams.get('date'); // YYYY-MM-DD
 
-    let url = `https://www.space-track.org/basicspacedata/query/class/tle_public/NORAD_CAT_ID/${noradId}/EPOCH/${date}/orderby/NORAD_CAT_ID%20asc/format/json/api_key/${NASA_API_KEY}`;
+    const url = `https://www.space-track.org/basicspacedata/query/class/tle_public/NORAD_CAT_ID/${noradId}/EPOCH/${date}/orderby/NORAD_CAT_ID%20asc/format/json/api_key/${NASA_API_KEY}`;
 
     const response = await fetch(url);
     if (!response.ok) {

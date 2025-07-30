@@ -13,7 +13,7 @@ export async function GET(req: Request) {
     const startTime = searchParams.get('start_time'); // YYYY-MM-DDTHH:MM:SSZ
     const endTime = searchParams.get('end_time'); // YYYY-MM-DDTHH:MM:SSZ
 
-    let url = `https://sscweb.gsfc.nasa.gov/WS/sscr/2/locations/${spacecraftId}/${startTime}/${endTime}?api_key=${NASA_API_KEY}`;
+    const url = `https://sscweb.gsfc.nasa.gov/WS/sscr/2/locations/${spacecraftId}/${startTime}/${endTime}?api_key=${NASA_API_KEY}`;
 
     const response = await fetch(url);
     if (!response.ok) {
