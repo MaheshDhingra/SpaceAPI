@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@types/pg": "^8.15.5",
     "dotenv": "^17.2.1",
     "next": "15.4.5",
     "pg": "^8.16.3",
