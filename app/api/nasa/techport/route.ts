@@ -13,15 +13,7 @@ export async function GET(req: Request) {
     const search = searchParams.get('search');
     const year = searchParams.get('year');
 
-    let url = `https://api.nasa.gov/techport/api/v1/projects?api_key=${NASA_API_KEY}`;
-    if (projectId) {
-      url = `https://api.nasa.gov/techport/api/v1/projects/${projectId}?api_key=${NASA_API_KEY}`;
-    } else if (search) {
-      url += `&q=${search}`;
-    }
-    if (year) {
-      url += `&year=${year}`;
-    }
+    const url = `https://api.nasa.gov/techport/api/v1/projects?api_key=${NASA_API_KEY}`;
 
     const response = await fetch(url);
     if (!response.ok) {

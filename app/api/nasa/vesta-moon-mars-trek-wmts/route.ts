@@ -17,7 +17,7 @@ export async function GET(req: Request) {
 
     // This is a simplified proxy for WMTS. A full implementation would require
     // more sophisticated WMTS client logic and understanding of tile matrix sets.
-    const url = `https://trek.nasa.gov/tiles/${tileMatrixSet}/wmts?request=GetTile&service=WMTS&version=1.0.0&layer=${tileMatrixSet}&style=default&format=${format}&TileMatrixSet=${tileMatrixSet}&TileMatrix=${tileMatrix}&TileRow=${tileRow}&TileCol=${tileCol}&api_key=${NASA_API_KEY}`;
+    const url = `https://trek.nasa.gov/api/tiles/${tileMatrixSet}/wmts?request=GetTile&service=WMTS&version=1.0.0&layer=${tileMatrixSet}&style=default&format=${format}&TileMatrixSet=${tileMatrixSet}&TileMatrix=${tileMatrix}&TileRow=${tileRow}&TileCol=${tileCol}&api_key=${NASA_API_KEY}`;
 
     const response = await fetch(url);
     if (!response.ok) {
