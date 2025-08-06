@@ -10,7 +10,9 @@
   },
   "dependencies": {
     "@types/pg": "^8.15.5",
+    "bcrypt": "^6.0.0",
     "dotenv": "^17.2.1",
+    "jsonwebtoken": "^9.0.2",
     "next": "15.4.5",
     "pg": "^8.16.3",
     "react": "19.1.0",
