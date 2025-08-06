@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import { query } from '../../lib/db'; // Import the query function
+import { query } from '@/lib/db'; // Import the query function
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your_jwt_secret'; // Fallback for development
 
@@ -36,7 +36,7 @@ export async function POST(request: Request) {
 
       const isPasswordValid = await bcrypt.compare(password, user.password);
 
-      if (!isPasswordValid) {
+      if (!isPasswordValid) { 
         return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
       }
 

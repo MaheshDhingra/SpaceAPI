@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { authenticateToken, AuthenticatedRequest } from '../../../lib/auth';
+import { authenticateToken, AuthenticatedRequest } from '@/lib/auth';
 
 async function protectedPostHandler(request: AuthenticatedRequest) {
   // This is a protected route. Only authenticated users can reach here.

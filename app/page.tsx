@@ -1,8 +1,121 @@
+"use client";
+
+import { useState } from 'react';
 import ApiTest from './components/ApiTest';
 
 export default function Home() {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [token, setToken] = useState<string | null>(null);
+  const [authMessage, setAuthMessage] = useState('');
+  const [protectedMessage, setProtectedMessage] = useState('');
+
+  const handleAuth = async (type: 'register' | 'login') => {
+    setAuthMessage('');
+    setToken(null);
+    try {
+      const response = await fetch('/api/auth', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password, type }),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        setAuthMessage(data.message);
+        setToken(data.token);
+      } else {
+        setAuthMessage(`Error: ${data.error}`);
+      }
+    } catch (error) {
+      setAuthMessage('Network error during authentication.');
+      console.error('Authentication fetch error:', error);
+    }
+  };
+
+  const handleProtectedPost = async () => {
+    setProtectedMessage('');
+    if (!token) {
+      setProtectedMessage('Please log in first to get a token.');
+      return;
+    }
+    try {
+      const response = await fetch('/api/protected', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+        body: JSON.stringify({ protectedData: 'This is sensitive data!' }),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        setProtectedMessage(`Success: ${data.message}`);
+      } else {
+        setProtectedMessage(`Error: ${data.message}`);
+      }
+    } catch (error) {
+      setProtectedMessage('Network error during protected POST.');
+      console.error('Protected POST fetch error:', error);
+    }
+  };
+
   return (
     <div>
+      <section className="mb-8">
+        <h2 className="text-2xl font-semibold mb-4">JWT Authentication</h2>
+        <div className="flex flex-col space-y-4 p-4 border rounded-lg shadow-md">
+          <input
+            type="text"
+            placeholder="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            className="p-2 border rounded"
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="p-2 border rounded"
+          />
+          <div className="flex space-x-2">
+            <button
+              onClick={() => handleAuth('register')}
+              className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+            >
+              Register
+            </button>
+            <button
+              onClick={() => handleAuth('login')}
+              className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
+            >
+              Login
+            </button>
+          </div>
+          {authMessage && <p className="mt-2 text-sm text-gray-700">{authMessage}</p>}
+          {token && (
+            <div className="mt-4 p-2 bg-gray-100 rounded">
+              <p className="font-semibold">JWT Token:</p>
+              <textarea
+                readOnly
+                value={token}
+                className="w-full h-24 p-2 border rounded bg-gray-50 text-sm break-all"
+              />
+            </div>
+          )}
+          <button
+            onClick={handleProtectedPost}
+            className="bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600 mt-4"
+            disabled={!token}
+          >
+            Test Protected POST
+          </button>
+          {protectedMessage && <p className="mt-2 text-sm text-gray-700">{protectedMessage}</p>}
+        </div>
+      </section>
+
       <section className="mb-8">
         <h2 className="text-2xl font-semibold mb-4">Core Features: Endpoints</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
