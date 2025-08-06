@@ -7,8 +7,8 @@ export interface AuthenticatedRequest extends NextRequest {
   user?: { username: string };
 }
 
-export function authenticateToken(handler: (...args: any[]) => Promise<NextResponse>) {
-  return async (request: AuthenticatedRequest, ...args: any[]) => {
+export function authenticateToken(handler: (request: AuthenticatedRequest, ...args: unknown[]) => Promise<NextResponse>) {
+  return async (request: AuthenticatedRequest, ...args: unknown[]) => {
     const authHeader = request.headers.get('authorization');
     const token = authHeader && authHeader.split(' ')[1];
 
