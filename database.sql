@@ -213,3 +213,11 @@ INSERT INTO celestial_bodies (name, type, discovery_date, discovered_by) VALUES
 ('Halley''s Comet', 'Comet', NULL, 'Edmond Halley'),
 ('Kepler-186f', 'Exoplanet', '2014-04-17', 'NASA Kepler Space Telescope'),
 ('Messier 87', 'Galaxy', '1781-03-18', 'Charles Messier');
+
+-- Create users table for authentication
+CREATE TABLE IF NOT EXISTS users (
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(255) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
