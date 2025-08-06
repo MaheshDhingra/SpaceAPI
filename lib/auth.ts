@@ -7,7 +7,7 @@ export interface AuthenticatedRequest extends NextRequest {
   user?: { username: string };
 }
 
-export function authenticateToken(handler: Function) {
+export function authenticateToken(handler: (...args: any[]) => Promise<NextResponse>) {
   return async (request: AuthenticatedRequest, ...args: any[]) => {
     const authHeader = request.headers.get('authorization');
     const token = authHeader && authHeader.split(' ')[1];
@@ -20,7 +20,7 @@ export function authenticateToken(handler: Function) {
       const user = jwt.verify(token, JWT_SECRET) as { username: string };
       request.user = user; // Attach user payload to the request
       return handler(request, ...args);
-    } catch (error) {
+    } catch (error: unknown) {
       console.error('JWT verification error:', error);
       return NextResponse.json({ message: 'Invalid or expired token' }, { status: 403 });
     }

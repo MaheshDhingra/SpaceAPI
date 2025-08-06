@@ -19,8 +19,8 @@ export async function POST(request: Request) {
         await query('INSERT INTO users (username, password) VALUES ($1, $2)', [username, hashedPassword]);
         const token = jwt.sign({ username }, JWT_SECRET, { expiresIn: '1h' });
         return NextResponse.json({ message: 'User registered successfully', token }, { status: 201 });
-      } catch (error: any) {
-        if (error.code === '23505') { // Unique violation code for PostgreSQL
+      } catch (error: unknown) {
+        if (error instanceof Error && 'code' in error && error.code === '23505') { // Unique violation code for PostgreSQL
           return NextResponse.json({ error: 'Username already exists' }, { status: 409 });
         }
         console.error('Registration error:', error);
